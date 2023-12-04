@@ -39,13 +39,14 @@ static void part1(string path)
                         number += array[i, j + k];
                         k++;
                     }
+                    j += k;
                     if(!number.Equals(""))
                     {
-                        if (!parts.Last().Equals(int.Parse(number)))
-                        {
+                        //if (!parts.Last().Equals(int.Parse(number)))
+                        //{
                             parts.Add(int.Parse(number));
                             //Console.WriteLine(number);
-                        }
+                        //}
                         number = "";
                     }
                 }

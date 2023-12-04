@@ -12,3 +12,4 @@ C:\Users\Robin\Documents\GitHub\AdventOfCode2023\3 dec\3 dec\obj\Debug\net8.0\re
 C:\Users\Robin\Documents\GitHub\AdventOfCode2023\3 dec\3 dec\obj\Debug\net8.0\3 dec.pdb
 C:\Users\Robin\Documents\GitHub\AdventOfCode2023\3 dec\3 dec\obj\Debug\net8.0\3 dec.genruntimeconfig.cache
 C:\Users\Robin\Documents\GitHub\AdventOfCode2023\3 dec\3 dec\obj\Debug\net8.0\ref\3 dec.dll
+C:\Users\Robin\Documents\GitHub\AdventOfCode2023\3 dec\3 dec\obj\Debug\net8.0\3 dec.sourcelink.json

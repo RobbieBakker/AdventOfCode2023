@@ -8,7 +8,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 string path = "C:\\Users\\Robin\\Documents\\GitHub\\AdventOfCode2023\\4 dec\\input.txt";
 
-//part1(path);
+part1(path);
 part2(path);
 
 static void part1(string path)
@@ -18,22 +18,10 @@ static void part1(string path)
 
     using (StreamReader sr = new StreamReader(path))
     {
-
         while ((line = sr.ReadLine()) != null)
         {
-            // remove the Card X:
-            line = line.Substring(line.IndexOf(':') + 2);
-            // split left and right list
-            List<string> splittedList = line.Split('|').ToList();
-            // convert them to ints and put each int into listitems
-            List<int> leftList = splittedList[0].Split().Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToList();
-            List<int> rightList = splittedList[1].Split().Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToList();
-
-            int matches;
-            matches = calculateMatches(leftList, rightList);
+            int matches = calculateMatches(line);
             sum += calculateScore(matches);
-            // calculate the scores based on matches
-            
         }
         Console.WriteLine(sum);
     }
@@ -47,6 +35,7 @@ static void part2(string path)
     List<string> bigList = new List<string>();
     Dictionary<int,int> copyList = new Dictionary<int,int>();
 
+    // Putting all the items in list bigList and putting occurrences in copyList
     using (StreamReader sr = new StreamReader(path))
     {
         int i = 0;
@@ -58,14 +47,11 @@ static void part2(string path)
         }
     }
     
+    // Checking matches and adding the new won copycards to the copyList value
     for(int i = 0;  i < bigList.Count; i++)
     {
-        leftRight = bigList[i].Substring(bigList[i].IndexOf(':')+2);
-        List<string> splittedList = leftRight.Split('|').ToList();
-        List<int> leftList = splittedList[0].Split().Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToList();
-        List<int> rightList = splittedList[1].Split().Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToList();
         int matches;
-        matches = calculateMatches(leftList, rightList);
+        matches = calculateMatches(bigList[i]);
 
         for(int j = i+1; j < (i + matches +1); j++)
         {
@@ -73,6 +59,8 @@ static void part2(string path)
         }
         
     }
+
+    // Reading copyList value to calculate amount of cards
     foreach(KeyValuePair<int, int> card in copyList)
     {
         cards += card.Value;
@@ -80,9 +68,17 @@ static void part2(string path)
     Console.WriteLine(cards);
 }
 
-static int calculateMatches(List<int> leftList, List<int> rightList)
+static int calculateMatches(string line)
 {
+    // remove the Card X:
+    line = line.Substring(line.IndexOf(':') + 2);
+    // split left and right list
+    List<string> splittedList = line.Split('|').ToList();
+    // convert them to ints and put each int into listitems
+    List<int> leftList = splittedList[0].Split().Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToList();
+    List<int> rightList = splittedList[1].Split().Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToList();
     int matches = 0;
+
     foreach (int value in rightList)
     {
         if (leftList.Contains(value))

@@ -1,11 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
-
-
-
-//part1();
 using Microsoft.VisualBasic;
 using System.Numerics;
 
+
+//part1();
 part2();
 
 static void part1()
@@ -31,7 +29,7 @@ static void part1()
     {
         int gameTime = games[i].Item1;
         int distToBeat = games[i].Item2;
-        output *= getPossibilities(gameTime, distToBeat);
+        output *= getWinnings(gameTime, distToBeat);
     }
     Console.WriteLine(output);
 }
@@ -51,52 +49,21 @@ static void part2()
     string distances = input.Split("Distance:")[1];
 
     int gameTime = int.Parse(times);
-    BigInteger distToBeat = BigInteger.Parse(distances);
-    BigInteger int1 = 51699833;
-    BigInteger int2 = 46;
-    Console.WriteLine(int1 * int2);
-    output = getWinnings(gameTime, distToBeat);
-    
-    
-
-    Console.WriteLine(output);
-
+    long distToBeat = long.Parse(distances);
+    Console.WriteLine(getWinnings(gameTime, distToBeat));
 }
 
-static int getWinnings(int gameTime, BigInteger distToBeat)
+static int getWinnings(int gameTime, long distToBeat)
 {
-    int timeLeft = gameTime;
-    BigInteger travelDist = 0;
     int wins = 0;
     for(int i = 0; i < gameTime; i++)
     {
-        timeLeft = gameTime - i;
-        travelDist = BigInteger.Parse(timeLeft.ToString()) * i;
+        int timeLeft = gameTime - i;
+        long travelDist = (long) timeLeft * i;
         if (travelDist > distToBeat)
         {
             wins++;
         }
     }
-
     return wins;
-}
-
-
-static int getPossibilities(int gameLength, int distToBeat)
-{
-    int pressTime = 0;
-    int timeLeft = gameLength;
-    int travelDist = 0;
-    int possibilities = 0;
-    for(int i = 0; i < gameLength; i++)
-    {
-        pressTime = i;
-        timeLeft = gameLength - pressTime;
-        travelDist = timeLeft * i;
-        if(travelDist > distToBeat)
-        {
-            possibilities++;
-        }
-    }
-    return possibilities;
 }
